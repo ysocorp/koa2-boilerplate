@@ -1,0 +1,10 @@
+{{> header }}
+<div>
+    <h3>Hello, {{user.last_name}} {{user.first_name}}</h3>
+    <p class="lead">
+        This is your access for the platform {{config.appName}} :<br/>
+        <strong>Id</strong> : {{user.email}}<br/>
+        <strong>link</strong> : <a href="{{url}}">{{url}}</a>
+    </p>
+</div>
+{{> footer }}
