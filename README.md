@@ -40,27 +40,26 @@ A **RESTful json API** boilerplate with **Koajs 2**, **@ Decorators**, **Node v8
 
 ## What's in this boilerplate ?
 
-* [`cluster`][cluster] to improve performance by adding workers (fork)
+* [`cluster`](https://nodejs.org/docs/latest/api/cluster.html) to improve performance by adding workers (fork)
 * **For routing**
-    * [`koajs 2`][koa] as the main, underlying framework
-    * [`kcors`][kcors] is used to handle cross-domain requests
-    * [`koa-helmet`][koa-helmet] helps you secure your api
-    * [`koa-bodyparser`][koa-bodyparser] to parse request bodies
-    * [`koa-compress`][koa-compress] to compress the response
-    * [`node-gettext`][node-gettext] for Internationalization (I18n)
-    * [`jsonwebtoken`][jsonwebtoken] an implementation of [JSON Web Tokens JWT](https://tools.ietf.org/html/rfc7519)
-* [`babel`][babel] to use the latest javascript version
+    * [`koajs 2`](https://github.com/koajs/koa) as the main, underlying framework
+    * [`kcors`](https://www.npmjs.com/package/kcors) is used to handle cross-domain requests
+    * [`koa-helmet`](https://www.npmjs.com/package/koa-helmet) helps you secure your api
+    * [`koa-bodyparser`](https://github.com/koajs/bodyparser) to parse request bodies
+    * [`koa-compress`](https://github.com/koajs/compress) to compress the response
+    * [`node-gettext`](https://github.com/alexanderwallin/node-gettext) for Internationalization (I18n)
+    * [`jsonwebtoken`](https://github.com/auth0/node-jsonwebtoken) an implementation of [JSON Web Tokens JWT](https://tools.ietf.org/html/rfc7519)
+* [`babel`](https://babeljs.io/) to use the latest javascript version
 * [`@Decorators`](https://babeljs.io/docs/plugins/transform-decorators/) to ensure a better project structure
-* [`nodemon`][nodemon] allows to automatically restart your API whenever you change a file during development.
-* [`eslint`][eslint] with [standard][standard], works with ES7 thanks to `babel-eslint`
-* [`config`][config] for environment variable management
-* [`chalk`][chalk] for logs
-* [`handlebars`][handlebars] to build templates view
+* [`nodemon`](https://github.com/remy/nodemon) allows to automatically restart your API whenever you change a file during development.
+* [`eslint`](https://github.com/eslint/eslint) with ES7 thanks to `babel-eslint`
+* [`config`](https://github.com/lorenwest/node-config) for environment variable management
+* [`handlebars`](https://github.com/wycats/handlebars.js/) to build templates view
 * **For models / db**
-    * [`sequelize 4`][sequelize] An ORM for Postgres, MySQL, SQLite and Microsoft SQL Server
-    * [`sequelize-cli`][sequelize-cli] The sequelize Command Line Interface
-    * [`umzug`][umzug] Migration tool for sequelize
-    * [`uuid`][uuid]
+    * [`sequelize 4`](http://docs.sequelizejs.com/) An ORM for Postgres, MySQL, SQLite and Microsoft SQL Server
+    * [`sequelize-cli`](https://github.com/sequelize/cli) The sequelize Command Line Interface
+    * [`umzug`](https://github.com/sequelize/umzug) Migration tool for sequelize
+    * [`uuid`](https://github.com/kelektiv/node-uuid)
 
 
 ## Directory structure
