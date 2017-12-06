@@ -1,11 +1,29 @@
 import config from 'config';
+import { join } from 'path';
+import { App as AppBase } from 'koa-smart';
+import { 
+  I18n, 
+  bodyParser, 
+  compress, 
+  cors, 
+  helmet,
+  addDefaultBody,
+  handleError,
+  logger,
+  passport,
+} from 'koa-smart/middlewares';
+
 
 import db from './models';
-import AppRouteManager from './routes/index';
+import authentification from './middlewares/authentification';
 
-export default class App {
+export default class App extends AppBase {
   constructor() {
+    super({ port: 3000 });
     this.addConfigEnv();
+    this.i18n = new I18n({
+      path: join(__dirname, 'locales'),
+    });
   }
 
   addConfigEnv() {
@@ -19,12 +37,23 @@ export default class App {
   }
 
   async start() {
-    try {
-      const models = db.initModels();
-      const routeManager = new AppRouteManager(models);
-      await routeManager.start();
-    } catch (error) {
-      console.log('[ERROR] :', error);
-    }
+    super.addMiddlewares([
+      cors({ credentials: true }),
+      helmet(),
+      bodyParser(),
+      this.i18n.middleware,
+      logger,
+      handleError,
+      addDefaultBody,
+      passport.initialize(),
+      authentification,
+      compress({}),
+    ]);
+
+    const models = db.initModels();
+    this.routeParam = { models };
+
+    super.mountFolder(join(__dirname, 'routes'), '/');
+    return super.start();
   }
 }

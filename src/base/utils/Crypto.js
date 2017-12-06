@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs';
 import crypto from 'crypto';
 import config from 'config';
-import jwt from 'jsonwebtoken';
+import { jsonwebtoken as jwt } from 'koa-smart/utils';
 
 let _instance = null;
 

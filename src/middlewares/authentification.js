@@ -1,7 +1,7 @@
 import config from 'config';
-import jwt from 'jsonwebtoken';
+import { jsonwebtoken as jwt } from 'koa-smart/utils';
 
-import { ENUM_TYPE } from '../../models/TableTokens'
+import { ENUM_TYPE } from '../models/TableTokens'
 
 const configJWT = config.jsonwebtoken;
 

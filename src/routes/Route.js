@@ -1,5 +1,4 @@
-import RouteBase from '../base/routes/RouteBase';
-import StatusCode from '../base/utils/statuscode';
+import { Route as RouteBase, StatusCode } from 'koa-smart';
 import { GROUPS } from '../models/TableUsergroups';
 
 export default class Route extends RouteBase {

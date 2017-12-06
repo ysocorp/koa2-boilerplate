@@ -1,7 +1,7 @@
 
 import sequelizeTransforms from 'sequelize-transforms';
 
-import ErrorApp from '../utils/ErrorApp';
+import { ErrorApp } from 'koa-smart';
 import utils, { validator } from '../utils';
 
 

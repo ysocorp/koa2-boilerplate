@@ -1,4 +1,4 @@
-import passport from 'koa-passport';
+import { passport } from 'koa-smart/middlewares';
 import { Strategy as LocalStrategy } from 'passport-local';
 
 import Route from './Route';
