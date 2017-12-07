@@ -2,7 +2,7 @@ import config from 'config';
 import { readFileSync } from 'fs';
 import Handlebars from 'handlebars';
 
-import * as utils from '../base/utils';
+import * as utils from '../base/utils/utils';
 
 export default class Email {
   constructor() {
@@ -40,7 +40,7 @@ export default class Email {
   }
 
   async _sendTemplate(templateName, subject, email, data) {
-    const content = readFileSync(`./public/email/${templateName}.html`);
+    const content = readFileSync(`./src/public/email/${templateName}.html`);
     const template = Handlebars.compile(`${content}`);
     const html = template({ ...data, config });
     return this._send(subject, html, email);
