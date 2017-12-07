@@ -15,15 +15,12 @@ export default class Route extends RouteBase {
   }
 
   // ************************************ MIDDLEWARE *********************************
-  beforeRoute({ options }) {
-    return async (ctx, next) => {
-      const canAccess = this.mlCanAccessRoute(ctx, options);
-      if (!canAccess) {
-        this.throw(StatusCode.forbidden, ctx.state.__('Forbidden access'));
-      }
-
-      await super.beforeRoute({ options })(ctx, next);
-    };
+  async beforeRoute(ctx, infos, next) {
+    const canAccess = this.mlCanAccessRoute(ctx, infos.options);
+    if (!canAccess) {
+      this.throw(StatusCode.forbidden, ctx.state.__('Forbidden access'));
+    }
+    await super.beforeRoute(ctx, infos, next);
   }
 
   mlCanAccessRoute(ctx, { accesses }) {

@@ -21,7 +21,7 @@
     "chalk": "^2.3.0",
     "config": "^1.24.0",
     "handlebars": "^4.0.6",
-    "koa-smart": "^1.0.0",
+    "koa-smart": "^1.0.2",
     "passport-local": "^1.0.0",
     "pg": "^6.4.2",
     "pg-hstore": "^2.3.2",
