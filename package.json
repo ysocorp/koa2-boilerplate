@@ -1,6 +1,6 @@
 {
   "name": "my-app",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": "YSO CORP",
   "description": "A RESTful API boilerplate with Koajs 2, @Decorator, Node v8, Sequelize, async-await, babel, and much more...",
   "license": "MIT",
