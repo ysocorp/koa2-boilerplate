@@ -1,6 +1,6 @@
 import Route from './Route';
 
-export default class RouteUtils extends Route {
+export default class RouteTest extends Route {
   constructor(params) {
     super({ ...params });
   }

@@ -10,7 +10,6 @@ import {
   addDefaultBody,
   handleError,
   logger,
-  passport,
 } from 'koa-smart/middlewares';
 
 
@@ -45,12 +44,12 @@ export default class App extends AppBase {
       logger,
       handleError,
       addDefaultBody,
-      passport.initialize(),
       authentification,
       compress({}),
     ]);
 
     const models = db.initModels();
+    this.app.context.models = models;
     this.routeParam = { models };
 
     super.mountFolder(join(__dirname, 'routes'), '/');
