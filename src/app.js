@@ -10,6 +10,8 @@ import {
   addDefaultBody,
   handleError,
   logger,
+  RateLimit, 
+  RateLimitStores,
 } from 'koa-smart/middlewares';
 
 
@@ -22,6 +24,10 @@ export default class App extends AppBase {
     this.addConfigEnv();
     this.i18n = new I18n({
       path: join(__dirname, 'locales'),
+    });
+
+    RateLimit.defaultOptions({
+        store: new RateLimitStores.Sequelize(db.sequelize),
     });
   }
 
@@ -46,6 +52,7 @@ export default class App extends AppBase {
       addDefaultBody,
       authentification,
       compress({}),
+      RateLimit.middleware({ interval: { min: 1 }, max: 100 }),
     ]);
 
     const models = db.initModels();
