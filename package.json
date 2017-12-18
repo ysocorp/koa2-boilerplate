@@ -18,11 +18,9 @@
   },
   "dependencies": {
     "bcryptjs": "^2.4.0",
-    "chalk": "^2.3.0",
     "config": "^1.24.0",
     "handlebars": "^4.0.6",
-    "koa-smart": "^1.0.2",
-    "passport-local": "^1.0.0",
+    "koa-smart": "^1.0.5",
     "pg": "^6.4.2",
     "pg-hstore": "^2.3.2",
     "request": "^2.83.0",
@@ -30,7 +28,6 @@
     "sequelize": "^4.22.7",
     "sequelize-cli": "^3.0.0",
     "sequelize-transforms": "github:allmas-tn/sequelize-transforms",
-    "sharp": "^0.18.4",
     "uuid": "^3.0.1"
   },
   "devDependencies": {
