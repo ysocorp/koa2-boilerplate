@@ -40,17 +40,9 @@ A **RESTful json API** boilerplate with **Koajs 2**, **@ Decorators**, **Node v8
 
 ## What's in this boilerplate ?
 
+* [**koa-smart**](https://github.com/ysocorp/koa-smart) Framework base on Koajs2, this allow you to develop RESTful API with : Class, Decorator, Params checker
 * [`cluster`](https://nodejs.org/docs/latest/api/cluster.html) to improve performance by adding workers (fork)
-* **For routing**
-    * [`koajs 2`](https://github.com/koajs/koa) as the main, underlying framework
-    * [`kcors`](https://www.npmjs.com/package/kcors) is used to handle cross-domain requests
-    * [`koa-helmet`](https://www.npmjs.com/package/koa-helmet) helps you secure your api
-    * [`koa-bodyparser`](https://github.com/koajs/bodyparser) to parse request bodies
-    * [`koa-compress`](https://github.com/koajs/compress) to compress the response
-    * [`node-gettext`](https://github.com/alexanderwallin/node-gettext) for Internationalization (I18n)
-    * [`jsonwebtoken`](https://github.com/auth0/node-jsonwebtoken) an implementation of [JSON Web Tokens JWT](https://tools.ietf.org/html/rfc7519)
 * [`babel`](https://babeljs.io/) to use the latest javascript version
-* [`@Decorators`](https://babeljs.io/docs/plugins/transform-decorators/) to ensure a better project structure
 * [`nodemon`](https://github.com/remy/nodemon) allows to automatically restart your API whenever you change a file during development.
 * [`eslint`](https://github.com/eslint/eslint) with ES7 thanks to `babel-eslint`
 * [`config`](https://github.com/lorenwest/node-config) for environment variable management
@@ -65,7 +57,6 @@ A **RESTful json API** boilerplate with **Koajs 2**, **@ Decorators**, **Node v8
 ## Directory structure
 The repository root contains auxiliary files like `package.json`, `.gitignore`, etc.
 
-* `bin`: files that are usually executed by `npm` scripts
 * `config`: all your config files (eg: nodemon.json, [`config`][config], ....)
 * `src`: the actual app's code is stored here
   * `base`: This is the folder that will normally remain same for all your apps, it includes basic functionalities for your app such as RoutesManager, RouteDecorator, ModelManager, etc.
@@ -73,7 +64,7 @@ The repository root contains auxiliary files like `package.json`, `.gitignore`, 
   * `locales`: all files needed to Internationalize your api (I18n)
   * `models`: all files starting with the name `Table...` will be imported into your sequelize models
   * `routes`: API endpoints go here, all files extending the RouteBase class will be loaded automatically
-      * `middleware`: custom middleware for your application, written koa-style.
+  * `middleware`: custom middleware for your application, written koa-style.
 
 ## Get started
 Clone this repository, remove the `.git` directory, run `git init`, and adjust details in `package.json`.
@@ -125,124 +116,11 @@ Before installing, [download and install Node.js](https://nodejs.org/en/download
 `yarn prod OR npm run prod`
 
 
-## Router with decorator
+## Router with decorator 
 **All routes have to extend the `Route` class in order to be added, and have to be inside the `routes` folder**
+see [`koa-smart`](https://github.com/ysocorp/koa-smart) for more informations
 
-If you have a route class with the name `RouteMyApi`, all the routes inside said class will be preceded by `/my-api/`
-* How does it work ?
-    1) the `Route` word is removed
-    2) uppercase letters are replaced with '-'. (essentially converting camelCase into camel-case)
-e.g.: this will add a get route => http://localhost:3000/my-api/hello
-
-  ```sh
-  export default class RouteMyApi extends Route {
-
-    @Route.Get({})
-    async hello(ctx) {
-      this.sendOk(ctx, ctx.state.__('hello'));
-    }
-
-  }
-  ```
-
-* **Get route**
-
-  ```sh
-    // /hello
-    @Route.Get({})
-    async hello(ctx) {
-      this.sendOk(ctx, null, ctx.state.__('hello'));
-    }
-  ```
-* **change path**
-
-  ```sh
-    // /myroute/15
-    @Route.Get({
-      path: '/myroute/:id'
-    })
-    async hello(ctx) {
-      this.sendOk(ctx, ctx.state.__('hello') + ctx.params.id);
-    }
-  ```
-
-* **Post route**
-  ```sh
-    // /user-post
-    @Route.Post({
-        params: { // params to allow: all other params will be rejected
-            email: true, // return a 400 error if the body doesn't contain email key
-            name: false, // optional parameter
-        },
-    })
-    async userPost(ctx) {
-      const body = this.body(ctx);
-      // body can contain only an object with email and name field
-      const user = await this.models.user.create(body);
-      this.sendCreated(ctx, user);
-    }
-  ```
-  * **manager params receive**
-      * **all other fields which aren't in the params object will be rejected**
-      * simplified writing
-
-        ```sh
-          params: ['email', 'name']
-          // is equal to
-          params: {
-            email: false,
-            name: false,
-          }
-          // is equal to
-          params: {
-            email: {
-              __force: false,
-            },
-            name: false,
-          }
-        ```
-      * **more option:**
-          * `__force` [boolean] tells whether a field is required or not
-          * `__func` an `Array<Function>` to be executed on the field one by one in order to validate / transform it
-          * Eg:
-
-              ```sh
-                params: {
-                  name: {
-                    __force: false,
-                    __func: [
-                        utils.trim,
-                        utilsParam.test(utils.notEmpty), // return 400 if empty
-                        utils.capitalize,
-                        (elem, route, { ctx, body, keyBody }) => {
-                          return elem.trim();
-                        },
-                        // do whatever you want...
-                    ],
-                  },
-                },
-              ```
-      * **Eg: object nested inside another object:**
-
-          ```sh
-            params: {
-              user: {
-                __force: true,
-                name: {
-                  __force: true,
-                  __func: [utils.trim],
-                },
-                password: true,
-                address: {
-                  __force: true,
-                  country: true,
-                  street: true,
-                }
-              },
-              date: false,
-            },
-          ```
 
 ## License
 
-  MIT
+  MIT © [YSO Corp](http://www.ysocorp.com/)
