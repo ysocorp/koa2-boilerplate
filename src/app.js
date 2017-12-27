@@ -1,16 +1,16 @@
 import config from 'config';
 import { join } from 'path';
 import { App as AppBase } from 'koa-smart';
-import { 
-  I18n, 
-  bodyParser, 
-  compress, 
-  cors, 
+import {
+  i18n,
+  bodyParser,
+  compress,
+  cors,
   helmet,
   addDefaultBody,
   handleError,
   logger,
-  RateLimit, 
+  RateLimit,
   RateLimitStores,
 } from 'koa-smart/middlewares';
 
@@ -22,10 +22,6 @@ export default class App extends AppBase {
   constructor() {
     super({ port: 3000 });
     this.addConfigEnv();
-    this.i18n = new I18n({
-      path: join(__dirname, 'locales'),
-    });
-
     RateLimit.defaultOptions({
         store: new RateLimitStores.Sequelize(db.sequelize),
     });
@@ -46,7 +42,11 @@ export default class App extends AppBase {
       cors({ credentials: true }),
       helmet(),
       bodyParser(),
-      this.i18n.middleware,
+      i18n(this.app, {
+        directory: join(__dirname, 'locales'),
+        locales: ['en', 'fr'],
+        modes: ['query', 'subdomain', 'cookie', 'header', 'tld'],
+    }),
       logger,
       handleError,
       addDefaultBody,
