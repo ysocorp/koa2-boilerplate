@@ -23,7 +23,7 @@ export default class App extends AppBase {
     super({ port: 3000 });
     this.addConfigEnv();
     RateLimit.defaultOptions({
-        store: new RateLimitStores.Sequelize(db.sequelize),
+      store: new RateLimitStores.Sequelize(db.sequelize),
     });
   }
 
@@ -46,10 +46,10 @@ export default class App extends AppBase {
         directory: join(__dirname, 'locales'),
         locales: ['en', 'fr'],
         modes: ['query', 'subdomain', 'cookie', 'header', 'tld'],
-    }),
-      logger,
-      handleError,
-      addDefaultBody,
+      }),
+      handleError(),
+      logger(),
+      addDefaultBody(),
       authentification,
       compress({}),
       RateLimit.middleware({ interval: { min: 1 }, max: 100 }),
